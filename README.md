@@ -1,0 +1,1 @@
+Welcome to Pixel Photography, a PHP-based web application designed to provide a seamless and intuitive platform for photographers to showcase, manage, and sell their photographs. Whether you're a professional photographer or an enthusiast, Pixel Photography offers a robust solution to present your portfolio online.
