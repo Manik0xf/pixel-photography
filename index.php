@@ -42,11 +42,72 @@
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
     <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 </head>
+<style>
+    /* Add some basic styling */
+.page-header-wrapper {
+    padding: 50px 0;
+}
+
+.page-header {
+    margin-bottom: 40px;
+}
+
+.devider {
+    height: 3px;
+    width: 50px;
+    background: #333;
+    margin: 20px auto;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.gallery img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.gallery .image-container {
+    flex: 1 1 calc(25% - 10px); /* Four images per row */
+    box-sizing: border-box;
+}
+
+.image-container {
+    margin: 10px;
+    text-align: center;
+}
+
+.gallery .btn {
+    margin: 5px;
+}
+
+.gallery .btn.active {
+    background-color: #333;
+    color: #fff;
+}
+
+.gallery .btn {
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.gallery .btn:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+</style>
 
 <body data-spy="scroll" data-target="#main-navbar">
     <div class="page-loader"></div> <!-- Display loading image while page loads -->
@@ -103,25 +164,38 @@
 
                     <div id="owl-intro-text" class="owl-carousel">
                         <div class="item">
-                            <h1>I'm Manik</h1>
-                            <p>A photographer who failed to tell stories in words</p>
+                            <h1>Pixel Photography</h1>
+                            <?php
+                            include 'connection.php';
+
+                            $query = "SELECT Description FROM home";
+                            $result = mysqli_query($conn, $query);
+
+                            if (mysqli_num_rows($result) > 0) {
+                                $row = mysqli_fetch_assoc($result);
+                                $description = $row['Description'];
+                            } else {
+                                $description = "Default description"; // Provide a default if no description is found
+                            }
+
+                            mysqli_close($conn);
+                            ?>
+                            <p data-animation="bounceInUp" data-delay="500ms">
+                                <?php echo htmlspecialchars($description); ?></p>
                             <div class="extra-space-l"></div>
-                            <a class="btn btn-blank page-scroll" href="#contact-section" 
-                                role="button">Contact Us</a>
+                            <a class="btn btn-blank page-scroll" href="#contact-section" role="button">Contact Us</a>
                         </div>
                         <div class="item">
                             <h1>Capture your best pictures</h1>
                             <p>Because every picture tells a story</p>
                             <div class="extra-space-l"></div>
-                            <a class="btn btn-blank page-scroll" href="#contact-section" 
-                                role="button">Contact Us</a>
+                            <a class="btn btn-blank page-scroll" href="#contact-section" role="button">Contact Us</a>
                         </div>
                         <div class="item">
                             <h1>Join with us</h1>
                             <p>To the greatest Journey</p>
                             <div class="extra-space-l"></div>
-                            <a class="btn btn-blank page-scroll" href="#contact-section" 
-                                role="button">Contact Us</a>
+                            <a class="btn btn-blank page-scroll" href="#contact-section" role="button">Contact Us</a>
                         </div>
                     </div>
 
@@ -157,7 +231,9 @@
                                 <span class="rotate-box-icon"><i class="fa fa-users"></i></span>
                                 <div class="rotate-box-info">
                                     <h4>Who We Are?</h4>
-                                    <p>We are Nepal’s leading photography agency. Our brands provide professional photography solutions for almost every business and individual looking to boost their online presence.</p>
+                                    <p>We are Nepal’s leading photography agency. Our brands provide professional
+                                        photography solutions for almost every business and individual looking to boost
+                                        their online presence.</p>
                                 </div>
                             </a>
                         </div>
@@ -177,7 +253,8 @@
                                 <span class="rotate-box-icon"><i class="fa fa-heart"></i></span>
                                 <div class="rotate-box-info">
                                     <h4>Why We Do It?</h4>
-                                    <p>We want to convey emotions through photography. A well-composed photograph can evoke a wide range of emotions, from joy and happiness to sadness and grief.</p>
+                                    <p>We want to convey emotions through photography. A well-composed photograph can
+                                        evoke a wide range of emotions, from joy and happiness to sadness and grief.</p>
                                 </div>
                             </a>
                         </div>
@@ -338,8 +415,8 @@
                     <!-- Cta Button -->
                     <div class="extra-space-l"></div>
                     <div class="text-center">
-                        <a class="btn btn-default btn-lg-xl page-scroll" href="#contact-section" 
-                            role="button">Contact Us</a>
+                        <a class="btn btn-default btn-lg-xl page-scroll" href="#contact-section" role="button">Contact
+                            Us</a>
                     </div>
                 </div> <!-- /.container -->
             </div>
@@ -379,7 +456,8 @@
                             <div class="item">
                                 <blockquote>
                                     <p>"Thanks so much for your work - we love them!
-                                        You’ve captured some wonderful moments for us and really appreciate everything"</p>
+                                        You’ve captured some wonderful moments for us and really appreciate everything"
+                                    </p>
                                     <footer><cite title="Source Title">Anup Bhattarai</cite></footer>
                                 </blockquote>
                             </div>
@@ -401,50 +479,81 @@
 
 
 
-        <!-- Begin Portfolio -->
-        <section id="portfolio-section" class="page bg-style1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="portfolio">
-                            <!-- Begin page header-->
-                            <div class="page-header-wrapper">
-                                <div class="container">
-                                    <div class="page-header text-center wow fadeInDown" data-wow-delay="0.4s">
-                                        <h2>Gallery</h2>
-                                        <div class="devider"></div>
-                                        <p class="subtitle">Some of our latest works</p>
-                                        <div class="gallery">
-                                        <?php
-include 'connection.php';
-$query = "SELECT img_name FROM image";
-$result = mysqli_query($conn, $query);
+ <!-- Begin Portfolio -->
+ <section id="portfolio-section" class="page bg-style1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portfolio">
+                    <!-- Begin page header-->
+                    <div class="page-header-wrapper">
+                        <div class="container">
+                            <div class="page-header text-center wow fadeInDown" data-wow-delay="0.4s">
+                                <h2>Gallery</h2>
+                                <div class="devider"></div>
+                                <?php
+                                    include 'connection.php';
 
-if (mysqli_num_rows($result) > 0) {
-    echo '<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">'; // Container with flexbox
-    $count = 0;
-    while ($row = mysqli_fetch_assoc($result)) {
-        if ($count % 3 == 0 && $count != 0) {
-            echo '</div><div style="display: flex; flex-wrap: wrap; justify-content: space-around;">'; // Start a new row every 3 images
-        }
-        echo '<div style="margin: 10px; text-align: center;">'; // Centered and with margin for spacing
-        echo '<img src="images/' . $row['img_name'] . '" alt="Image" style="max-width: 300px; height: 300px; object-fit: cover;">'; // Image sizing
-        echo '</div>';
-        $count++;
-    }
-    echo '</div>'; // End of container
-} else {
-    echo '<p>No images found in the database.</p>';
-}
-?>
+                                    // Get the selected category from the form, default to 'All'
+                                    $category = isset($_GET['category']) ? $_GET['category'] : 'All';
+
+                                    // Modify the query based on the selected category
+                                    if ($category === 'All') {
+                                        $query = "SELECT img_name, category FROM image";
+                                    } else {
+                                        $query = "SELECT img_name, category FROM image WHERE category = ?";
+                                    }
+
+                                    // Prepare the statement
+                                    if ($stmt = mysqli_prepare($conn, $query)) {
+                                        if ($category !== 'All') {
+                                            mysqli_stmt_bind_param($stmt, "s", $category);
+                                        }
+                                        mysqli_stmt_execute($stmt);
+                                        $result = mysqli_stmt_get_result($stmt);
+
+                                        echo '<div class="gallery">';
+                                        if (mysqli_num_rows($result) > 0) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                echo '<div class="image-container">'; // Centered and with margin for spacing
+                                                echo '<img src="images/' . htmlspecialchars($row['img_name']) . '" alt="Image">'; // No width or height, original size
+                                                echo '</div>';
+                                            }
+                                        } else {
+                                            echo '<p>No images found in the database.</p>';
+                                        }
+                                        echo '</div>';
+                                    } else {
+                                        echo '<p>Database query failed: ' . mysqli_error($conn) . '</p>';
+                                    }
+
+                                    // Close the statement and connection
+                                    mysqli_stmt_close($stmt);
+                                    mysqli_close($conn);
+                                ?>
+                                <p class="subtitle">Some of our latest works</p>
+                                <div class="gallery">
+                                    <div class="lx-projects-menu wow fadeInUp" data-wow-delay="100ms">
+                                        <form method="GET" style="text-align: center;">
+                                            <button type="submit" name="category" value="All" class="btn <?php echo ($category == 'All') ? 'active' : ''; ?>">All</button>
+                                            <button type="submit" name="category" value="Portrait" class="btn <?php echo ($category == 'Portrait') ? 'active' : ''; ?>">Portrait</button>
+                                            <button type="submit" name="category" value="Nature" class="btn <?php echo ($category == 'Nature') ? 'active' : ''; ?>">Nature</button>
+                                            <button type="submit" name="category" value="Product" class="btn <?php echo ($category == 'Product') ? 'active' : ''; ?>">Product</button>
+                                            <button type="submit" name="category" value="Wedding" class="btn <?php echo ($category == 'Wedding') ? 'active' : ''; ?>">Wedding</button>
+                                        </form>
                                     </div>
                                 </div>
+                                <!-- End page header-->
                             </div>
-                            <!-- End page header-->
-                           
-        </section>
-        <!-- End portfolio -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+        <!-- End portfolio -->
 
 
 
@@ -648,7 +757,7 @@ if (mysqli_num_rows($result) > 0) {
 
 
 
-           
+
 
         <!-- Begin social section -->
         <section id="social-section">
@@ -688,71 +797,88 @@ if (mysqli_num_rows($result) > 0) {
 
 
 
-        <!-- Begin contact section -->
-        <section id="contact-section" class="page text-white parallax" data-stellar-background-ratio="0.5"
-            style="background-image: url(img/map-bg.jpg);">
-            <div class="cover"></div>
+        <!-- contact section -->
+        <section id="contact" class="py-7">
+            <div class="container">
+                <div class="contact-content flex">
+                    <div class="contact-left">
+                        <div class="title">
+                            <h2>Contact Us</h2>
+                        </div>
+                        <div class="contact wow bounceInRight" data-wow-delay="0.4s">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="contact-info">
+                                            <h4>Our Address</h4>
+                                            <ul class="contact-address">
+                                                <li><i class="fa fa-map-marker fa-lg"></i>&nbsp; Tilottama-07,
+                                                    Bhalwari,<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    Rupandehi,
+                                                    Lumbini,<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nepal
+                                                </li>
+                                                <li><i class="fa fa-phone"></i>&nbsp; 9800769650</li>
+                                                <li><i class="fa fa-envelope"></i> pixel_photography@gmail.com</li>
+                                                <li><i class="fa fa-skype"></i> Pixel-Photography</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="contact-form">
+                                            <h4>Write to us</h4>
+                                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
+                                                method="POST">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control input-lg" name="first_name"
+                                                        placeholder="First Name" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control input-lg" name="last_name"
+                                                        placeholder="Last Name" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="email" class="form-control input-lg" name="email"
+                                                        placeholder="Email" required>
+                                                </div>
+                                                <input type="submit" class="btn-submit btn" value="Submit">
+                                            </form>
+                                            <?php
+                                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                include 'connection.php';
+                                                $first_name = $_POST['first_name'];
+                                                $last_name = $_POST['last_name'];
+                                                $email = $_POST['email'];
 
-            <!-- Begin page header-->
-            <div class="page-header-wrapper">
-                <div class="container">
-                    <div class="page-header text-center wow fadeInDown" data-wow-delay="0.4s">
-                        <h2>Contacts</h2>
-                        <div class="devider"></div>
-                        <p class="subtitle">All to contact us</p>
+                                                // Check if any field is empty
+                                                if (empty($first_name) || empty($last_name) || empty($email)) {
+                                                    echo "Error: All fields are required.";
+                                                } else {
+                                                    $query = "INSERT INTO contact (First_name, Last_name, Email) VALUES (?, ?, ?)";
+                                                    $stmt = mysqli_prepare($conn, $query);
+                                                    mysqli_stmt_bind_param($stmt, "sss", $first_name, $last_name, $email);
+                                                    mysqli_stmt_execute($stmt);
+
+                                                    if (mysqli_stmt_affected_rows($stmt) > 0) {
+                                                        echo "Thank you for contacting us.";
+                                                    } else {
+                                                        echo "Error: " . mysqli_error($conn);
+                                                    }
+                                                }
+
+                                                // Close connection
+                                                mysqli_close($conn);
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- End page header-->
-
-            <div class="contact wow bounceInRight" data-wow-delay="0.4s">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-sm-6">
-                            <div class="contact-info">
-                                <h4>Our Address</h4>
-                                <ul class="contact-address">
-                                    <li><i class="fa fa-map-marker fa-lg"></i>&nbsp; Tilottama-07
-                                        , Bhalwari ,<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rupandehi ,
-                                        Lumbini ,<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nepal
-                                    </li>
-                                    <li><i class="fa fa-phone"></i>&nbsp; 9800769650</li>
-                                    <li><i class="fa fa-envelope"></i> pixel_photography@gmail.com</li>
-                                    <li><i class="fa fa-skype"></i> Pixel-Photography</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="contact-form">
-                                <h4>Write to us</h4>
-                                <form role="form">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control input-lg" placeholder="Your Name"
-                                            required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" class="form-control input-lg" placeholder="E-mail" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control input-lg" placeholder="Subject" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control input-lg" rows="5" placeholder="Message"
-                                            required></textarea>
-                                    </div>
-                                    <button type="submit" class="btn wow bounceInRight"
-                                        data-wow-delay="0.8s">Send</button>
-                                </form>
-                            </div>
-                        </div>
-
-                    </div> <!-- /.row -->
-                </div> <!-- /.container -->
-            </div>
         </section>
-        <!-- End contact section -->
+        <!-- end of contact section -->
 
 
 
@@ -771,16 +897,15 @@ if (mysqli_num_rows($result) > 0) {
                                 <li><a href="">Services</a></li>
                                 <li><a href="">Works</a></li>
                             </ul>
-                            </div>
+                        </div>
                     </div> <!-- /.row -->
                 </div> <!-- /.container -->
             </div>
 
             <div class="footer">
                 <div class="container text-center wow fadeIn" data-wow-delay="0.4s">
-                    <p class="copyright">Copyright &copy; 2024 - Designed By <a href=""
-                            class="theme-author">Manik Thapa</a> &amp; Developed by <a
-                            href="" class="theme-author">Pixel Photohraphy</a></p>
+                    <p class="copyright">Copyright &copy; 2024 - Designed By <a href="" class="theme-author">Manik
+                            Thapa</a> &amp; Developed by <a href="" class="theme-author">Pixel Photohraphy</a></p>
                 </div>
             </div>
 
